@@ -34,7 +34,7 @@ const Home = () => {
         setCategories(categoriesData);
         // Filter active carousels and map image_url to image for component compatibility
         const processedCarousels = carouselsData
-          .filter(carousel => carousel.is_active === 1 || carousel.is_active === true)
+          .filter(carousel => carousel.is_active)
           .map(carousel => ({
             ...carousel,
             image: carousel.image_url,
