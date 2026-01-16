@@ -1,0 +1,50 @@
+.admin-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  padding: 20px;
+
+  .admin-login-card {
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+
+    .ant-card-head {
+      background-color: #1890ff;
+      color: white;
+      border-bottom: none;
+
+      h2 {
+        color: white;
+        margin: 0;
+      }
+    }
+
+    .ant-card-body {
+      padding: 24px;
+    }
+
+    .ant-alert {
+      margin-bottom: 20px;
+    }
+
+    .ant-btn-primary {
+      background-color: #1890ff;
+      border-color: #1890ff;
+
+      &:hover,
+      &:focus {
+        background-color: #40a9ff;
+        border-color: #40a9ff;
+      }
+    }
+
+    .ant-form-item-label > label {
+      font-weight: 600;
+    }
+  }
+}

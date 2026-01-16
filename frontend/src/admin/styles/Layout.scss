@@ -1,0 +1,64 @@
+.admin-layout {
+  min-height: 100vh;
+
+  .admin-sider {
+    background-color: #001529;
+    transition: all 0.3s;
+
+    .admin-logo {
+      padding: 16px 0;
+      background-color: #1890ff;
+    }
+  }
+
+  .admin-main-layout {
+    background-color: #f0f2f5;
+  }
+
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    z-index: 100;
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .admin-trigger {
+      font-size: 18px;
+      line-height: 64px;
+      padding: 0 24px;
+      cursor: pointer;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #1890ff;
+      }
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+
+  .admin-content {
+    margin: 24px 16px;
+    padding: 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    min-height: 280px;
+
+    .admin-content-wrapper {
+      width: 100%;
+    }
+  }
+}

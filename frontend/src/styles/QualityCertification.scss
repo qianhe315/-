@@ -1,0 +1,229 @@
+.quality-certification-page {
+  /* Breadcrumb Section */
+  .breadcrumb-section {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    border-bottom: 1px solid #e9ecef;
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .ant-breadcrumb {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #666;
+
+      .ant-breadcrumb-link {
+        color: #3498db;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #2980b9;
+        }
+      }
+    }
+  }
+
+  /* Quality Certification Section */
+  .quality-certification-section {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      text-align: center;
+
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+
+    .section-description {
+      font-size: 1.1rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 50px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 400px;
+      gap: 20px;
+
+      .ant-spin {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: #666;
+        margin: 0;
+      }
+    }
+
+    .error-container {
+      text-align: center;
+      padding: 60px 0;
+
+      h2 {
+        font-size: 2rem;
+        color: #e74c3c;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 1.1rem;
+        color: #666;
+      }
+    }
+
+    .certifications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 30px;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .certification-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .ant-card-body {
+          padding: 20px;
+        }
+
+        .certification-content {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .certification-image {
+          text-align: center;
+          background-color: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+
+          img {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+          }
+        }
+
+        .certification-info {
+          .certification-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            text-align: center;
+          }
+
+          .certification-description {
+            p {
+              font-size: 1.05rem;
+              line-height: 1.6;
+              color: #555;
+              margin-bottom: 10px;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* Quality Commitment Section */
+  .quality-commitment-section {
+    background-color: #f8f9fa;
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 50px;
+      color: #2c3e50;
+      text-align: center;
+
+      @media (max-width: 768px) {
+        font-size: 1.6rem;
+      }
+    }
+
+    .commitment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .commitment-item {
+        background-color: white;
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .commitment-icon {
+          font-size: 3.5rem;
+          margin-bottom: 20px;
+        }
+
+        h3 {
+          font-size: 1.3rem;
+          font-weight: 700;
+          margin-bottom: 15px;
+          color: #2c3e50;
+        }
+
+        p {
+          font-size: 1.05rem;
+          line-height: 1.6;
+          color: #555;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

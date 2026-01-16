@@ -1,0 +1,26 @@
+.dashboard-container {
+  width: 100%;
+
+  .ant-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    transition: all 0.3s;
+
+    &:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .ant-statistic {
+    .ant-statistic-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .ant-statistic-content {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+  }
+}
