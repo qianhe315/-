@@ -84,7 +84,7 @@ const Home = () => {
               >
                 <div 
                   className="hero-image"
-                  style={{ backgroundImage: `url(/uploads/${carousel.image})` }}
+                  style={{ backgroundImage: `url(http://www.starleap.xin/uploads/${carousel.image})` }}
                 >
                   <div className="hero-overlay"></div>
                   <div className="container hero-content">
