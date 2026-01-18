@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Breadcrumb, Row, Col, Card, Spin } from 'antd';
 import api from '../services/api';
+import { getImageUrl } from '../utils/imageUtils';
 import '../styles/ProductionProcess.scss';
 
 const ProductionProcess = () => {
@@ -57,7 +58,7 @@ const ProductionProcess = () => {
                     <Col xs={24} md={10}>
                       <div className="process-image">
                         {process.imageUrl ? (
-                          <img src={process.imageUrl} alt={process.title} />
+                          <img src={getImageUrl(process.imageUrl)} alt={process.title} />
                         ) : (
                           <div className="placeholder-image">
                             <h3>Process Image</h3>

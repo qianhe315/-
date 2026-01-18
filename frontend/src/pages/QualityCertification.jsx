@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Breadcrumb, Row, Col, Card, Spin } from 'antd';
 import api from '../services/api';
+import { getImageUrl } from '../utils/imageUtils';
 import '../styles/QualityCertification.scss';
 
 const QualityCertification = () => {
@@ -55,7 +56,7 @@ const QualityCertification = () => {
                 <Card key={certification.id} className="certification-card">
                   <div className="certification-content">
                     <div className="certification-image">
-                      <img src={certification.imageUrl} alt={certification.name} />
+                      <img src={getImageUrl(certification.imageUrl)} alt={certification.name} />
                     </div>
                     <div className="certification-info">
                       <h2 className="certification-name">{certification.name}</h2>
