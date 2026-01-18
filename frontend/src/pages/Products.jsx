@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Card, Row, Col, Select, Spin, Empty } from 'antd';
 import api from '../services/api';
-import { getImageUrl } from '../utils/imageUtils';
 import '../styles/Products.scss';
 
 const { Option } = Select;
@@ -95,7 +94,7 @@ const Products = () => {
                       <div className="product-image">
                         {product.product_images && product.product_images.length > 0 ? (
                           <img
-                            src={getImageUrl(product.product_images[0].imageUrl)}
+                            src={product.product_images[0].imageUrl}
                             alt={product.name}
                             className="product-img"
                           />

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Row, Col, Card } from 'antd';
 import api from '../services/api';
-import { getImageUrl } from '../utils/imageUtils';
 import '../styles/Home.scss';
 
 const Home = () => {
@@ -85,7 +84,7 @@ const Home = () => {
               >
                 <div 
                   className="hero-image"
-                  style={{ backgroundImage: `url(${getImageUrl(carousel.image)})` }}
+                  style={{ backgroundImage: `url(http://www.starleap.xin/uploads/${carousel.image})` }}
                 >
                   <div className="hero-overlay"></div>
                   <div className="container hero-content">
@@ -167,7 +166,7 @@ const Home = () => {
                   <div className="product-image">
                     {product.product_images && product.product_images.length > 0 ? (
                       <img 
-                        src={getImageUrl(product.product_images[0].imageUrl)} 
+                        src={product.product_images[0].imageUrl} 
                         alt={product.name} 
                         className="product-img"
                       />

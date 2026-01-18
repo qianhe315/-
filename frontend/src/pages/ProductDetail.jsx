@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Card, Row, Col, Image, Spin, Descriptions, Button, Breadcrumb } from 'antd';
 import api from '../services/api';
-import { getImageUrl } from '../utils/imageUtils';
 import '../styles/ProductDetail.scss';
 
 const ProductDetail = () => {
@@ -18,7 +17,7 @@ const ProductDetail = () => {
         const data = await api.products.getById(id);
         setProduct(data);
         if (data.product_images && data.product_images.length > 0) {
-          setActiveImage(getImageUrl(data.product_images[0].imageUrl));
+          setActiveImage(data.product_images[0].imageUrl);
         }
       } catch (error) {
         console.error('Error fetching product:', error);
@@ -72,11 +71,11 @@ const ProductDetail = () => {
               <div className="product-images">
                 <div className="main-image">
                   <Image
-                    src={getImageUrl(activeImage)}
+                    src={activeImage}
                     alt={product.name}
                     className="zoomable-image"
                     preview={{ 
-                      src: getImageUrl(activeImage),
+                      src: activeImage,
                       mask: true,
                     }}
                   />
@@ -88,11 +87,11 @@ const ProductDetail = () => {
                     {product.product_images.map((image) => (
                       <div 
                         key={image.id}
-                        className={`thumbnail-item ${activeImage === getImageUrl(image.imageUrl) ? 'active' : ''}`}
-                        onClick={() => setActiveImage(getImageUrl(image.imageUrl))}
+                        className={`thumbnail-item ${activeImage === image.imageUrl ? 'active' : ''}`}
+                        onClick={() => setActiveImage(image.imageUrl)}
                       >
                         <Image
-                          src={getImageUrl(image.imageUrl)}
+                          src={image.imageUrl}
                           alt={`${product.name} - thumbnail`}
                           className="thumbnail-image"
                         />

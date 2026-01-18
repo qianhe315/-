@@ -6,17 +6,15 @@ export const getImageUrl = (imagePath) => {
     return imagePath;
   }
   
-  // 获取API基础URL
+  // 如果是相对路径，根据环境构建完整URL
   const apiBaseUrl = import.meta.env.VITE_API_URL || '';
   
-  // 如果路径以 /uploads 开头，直接拼接API URL
   if (imagePath.startsWith('/uploads')) {
     return apiBaseUrl ? `${apiBaseUrl}${imagePath}` : imagePath;
   }
   
-  // 如果路径不以 /uploads 开头，说明是文件名，需要添加 /uploads 前缀
-  const fullPath = `/uploads/${imagePath}`;
-  return apiBaseUrl ? `${apiBaseUrl}${fullPath}` : fullPath;
+  // 其他情况，假设是相对路径
+  return imagePath;
 };
 
 export const getCarouselImageUrl = (carousel) => {
