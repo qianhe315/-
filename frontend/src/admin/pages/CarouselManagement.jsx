@@ -58,7 +58,7 @@ const CarouselManagement = () => {
       sortOrder: carousel.sortOrder
     });
     setEditingId(carousel.id);
-    setImageUrl(`/uploads/${carousel.image}`);
+    setImageUrl(carousel.image);
     setIsActive(carousel.isActive);
     setModalVisible(true);
   };
@@ -146,7 +146,7 @@ const CarouselManagement = () => {
       key: 'image',
       render: (image) => (
         <img 
-          src={`/uploads/${image}`} 
+          src={image} 
           alt="Carousel" 
           style={{ width: 80, height: 45, objectFit: 'cover', borderRadius: 4 }}
         />

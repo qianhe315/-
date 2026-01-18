@@ -91,7 +91,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     const { title, description, buttonText, buttonLink, sortOrder, isActive, existing_image } = req.body;
-    let image = req.file ? req.file.filename : null;
+    let image = req.file ? `/uploads/${req.file.filename}` : null;
     
     // If no file is uploaded, check if existing_image is provided
     if (!image && existing_image) {
@@ -138,7 +138,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
     
     // Get existing image if no new image is uploaded
     const currentImage = existingItems[0].image_url;
-    let image = req.file ? req.file.filename : null;
+    let image = req.file ? `/uploads/${req.file.filename}` : null;
     
     // If no file is uploaded, check if existing_image is provided, otherwise use current image
     if (!image) {
