@@ -1,23 +1,24 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const CompanyInfo = sequelize.define('CompanyInfo', {
-  title: {
-    type: DataTypes.STRING(200),
+const TeamMember = sequelize.define('TeamMember', {
+  name: {
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
-  content: {
-    type: DataTypes.TEXT,
+  position: {
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   imageUrl: {
     type: DataTypes.STRING(500),
-    allowNull: true,
+    allowNull: false,
     field: 'image_url',
   },
-  type: {
-    type: DataTypes.ENUM('brand_story', 'about_us', 'mission_vision'),
-    allowNull: false,
+  sortOrder: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+    field: 'sort_order',
   },
   isActive: {
     type: DataTypes.BOOLEAN,
@@ -36,9 +37,9 @@ const CompanyInfo = sequelize.define('CompanyInfo', {
     field: 'updated_at',
   },
 }, {
-  tableName: 'company_info',
+  tableName: 'team_members',
   timestamps: true,
   underscored: true,
 });
 
-module.exports = CompanyInfo;
+module.exports = TeamMember;

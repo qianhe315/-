@@ -61,9 +61,13 @@ const BrandStory = () => {
                 </Col>
                 <Col xs={24} md={12}>
                   <div className="story-image">
-                    <div className="placeholder-image">
-                      <h3>Brand Story Image</h3>
-                    </div>
+                    {brandStory.imageUrl ? (
+                      <img src={brandStory.imageUrl} alt="Brand Story" className="brand-story-main-image" />
+                    ) : (
+                      <div className="placeholder-image">
+                        <h3>Brand Story Image</h3>
+                      </div>
+                    )}
                     <Card className="story-card">
                       <h3>Our Mission</h3>
                       <p>To empower cheerleaders with high-quality, stylish uniforms that help them perform at their best.</p>

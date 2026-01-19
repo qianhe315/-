@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form, Input, Select, message, Space, Typography, Tag, Row, Col } from 'antd';
+import { Table, Button, Modal, Form, Input, Select, Upload, message, Space, Typography, Tag, Row, Col } from 'antd';
 const { TextArea } = Input;
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, UploadOutlined, CloseOutlined } from '@ant-design/icons';
 import AdminLayout from '../components/Layout';
 import companyInfoService from '../services/companyInfoService';
+import adminApi from '../services/adminApi';
 
 
 const { Title, Text } = Typography;
@@ -15,6 +16,7 @@ const CompanyInfoManagement = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [editingId, setEditingId] = useState(null);
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     fetchCompanyInfos();
@@ -35,12 +37,14 @@ const CompanyInfoManagement = () => {
   const handleAddCompanyInfo = () => {
     form.resetFields();
     setEditingId(null);
+    setImageUrl('');
     setModalVisible(true);
   };
 
   const handleEditCompanyInfo = (companyInfo) => {
     form.setFieldsValue(companyInfo);
     setEditingId(companyInfo.id);
+    setImageUrl(companyInfo.imageUrl || '');
     setModalVisible(true);
   };
 
@@ -56,13 +60,16 @@ const CompanyInfoManagement = () => {
 
   const handleSubmit = async (values) => {
     try {
+      const companyInfoData = {
+        ...values,
+        imageUrl: imageUrl
+      };
+      
       if (editingId) {
-        // Update company info
-        await companyInfoService.updateCompanyInfo(editingId, values);
+        await companyInfoService.updateCompanyInfo(editingId, companyInfoData);
         message.success('Company info updated successfully');
       } else {
-        // Create company info
-        await companyInfoService.createCompanyInfo(values);
+        await companyInfoService.createCompanyInfo(companyInfoData);
         message.success('Company info created successfully');
       }
       setModalVisible(false);
@@ -70,6 +77,30 @@ const CompanyInfoManagement = () => {
     } catch (err) {
       message.error('Failed to save company info');
     }
+  };
+
+  const handleFileUpload = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const response = await adminApi.post('/media/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      setImageUrl(response.filePath);
+      return false;
+    } catch (err) {
+      message.error('Failed to upload image');
+      return false;
+    }
+  };
+
+  const handleDeleteImage = () => {
+    setImageUrl('');
+    message.success('Image deleted successfully');
   };
 
   const columns = [
@@ -205,6 +236,39 @@ const CompanyInfoManagement = () => {
               label="Content"
             >
               <TextArea rows={6} placeholder="Company Info Content" />
+            </Form.Item>
+            
+            <Form.Item label="Image">
+              <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                {imageUrl ? (
+                  <div style={{ position: 'relative', display: 'inline-block' }}>
+                    <img src={imageUrl} alt="Company Info" style={{ width: 200, height: 200, objectFit: 'cover', borderRadius: 4 }} />
+                    <Button 
+                      type="text" 
+                      icon={<CloseOutlined />} 
+                      danger
+                      size="small"
+                      style={{ position: 'absolute', top: -8, right: -8, background: 'white', borderRadius: '50%', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', minWidth: 24, height: 24, padding: 0 }}
+                      onClick={handleDeleteImage}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                ) : (
+                  <Upload
+                    listType="picture-card"
+                    beforeUpload={handleFileUpload}
+                    customRequest={handleFileUpload}
+                    maxCount={1}
+                    showUploadList={false}
+                  >
+                    <div>
+                      <UploadOutlined />
+                      <div style={{ marginTop: 8 }}>Upload</div>
+                    </div>
+                  </Upload>
+                )}
+              </Space>
             </Form.Item>
             
             <Row gutter={16}>

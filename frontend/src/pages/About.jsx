@@ -5,22 +5,27 @@ import '../styles/About.scss';
 
 const About = () => {
   const [aboutUs, setAboutUs] = useState(null);
+  const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchAboutUs = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await api.companyInfo.getByType('about_us');
-        setAboutUs(data);
+        const [aboutData, teamData] = await Promise.all([
+          api.companyInfo.getByType('about_us'),
+          fetch('http://www.starleap.xin/api/team-members').then(res => res.json())
+        ]);
+        setAboutUs(aboutData);
+        setTeamMembers(teamData);
       } catch (error) {
-        console.error('Error fetching about us:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAboutUs();
+    fetchData();
   }, []);
 
   return (
@@ -60,9 +65,13 @@ const About = () => {
                 </Col>
                 <Col xs={24} md={12}>
                   <div className="about-image">
-                    <div className="placeholder-image">
-                      <h3>About Us Image</h3>
-                    </div>
+                    {aboutUs.imageUrl ? (
+                      <img src={aboutUs.imageUrl} alt="About Us" className="about-main-image" />
+                    ) : (
+                      <div className="placeholder-image">
+                        <h3>About Us Image</h3>
+                      </div>
+                    )}
                     <Card className="about-card">
                       <h3>Our Team</h3>
                       <p>We are a dedicated team of professionals with years of experience in the cheerleading apparel industry.</p>
@@ -89,45 +98,69 @@ const About = () => {
         <div className="container">
           <h2 className="section-title">Our Team</h2>
           <div className="team-grid">
-            <Card className="team-card">
-              <div className="team-member">
-                <div className="member-image">
-                  <div className="placeholder-avatar">
-                    <h3>JD</h3>
+            {teamMembers.length > 0 ? (
+              teamMembers.map((member) => (
+                <Card key={member.id} className="team-card">
+                  <div className="team-member">
+                    <div className="member-image">
+                      {member.imageUrl ? (
+                        <img src={member.imageUrl} alt={member.name} className="member-avatar" />
+                      ) : (
+                        <div className="placeholder-avatar">
+                          <h3>{member.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}</h3>
+                        </div>
+                      )}
+                    </div>
+                    <div className="member-info">
+                      <h3 className="member-name">{member.name}</h3>
+                      <p className="member-position">{member.position}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="member-info">
-                  <h3 className="member-name">John Doe</h3>
-                  <p className="member-position">CEO & Founder</p>
-                </div>
-              </div>
-            </Card>
-            <Card className="team-card">
-              <div className="team-member">
-                <div className="member-image">
-                  <div className="placeholder-avatar">
-                    <h3>JS</h3>
+                </Card>
+              ))
+            ) : (
+              <>
+                <Card className="team-card">
+                  <div className="team-member">
+                    <div className="member-image">
+                      <div className="placeholder-avatar">
+                        <h3>JD</h3>
+                      </div>
+                    </div>
+                    <div className="member-info">
+                      <h3 className="member-name">John Doe</h3>
+                      <p className="member-position">CEO & Founder</p>
+                    </div>
                   </div>
-                </div>
-                <div className="member-info">
-                  <h3 className="member-name">Jane Smith</h3>
-                  <p className="member-position">Design Director</p>
-                </div>
-              </div>
-            </Card>
-            <Card className="team-card">
-              <div className="team-member">
-                <div className="member-image">
-                  <div className="placeholder-avatar">
-                    <h3>MD</h3>
+                </Card>
+                <Card className="team-card">
+                  <div className="team-member">
+                    <div className="member-image">
+                      <div className="placeholder-avatar">
+                        <h3>JS</h3>
+                      </div>
+                    </div>
+                    <div className="member-info">
+                      <h3 className="member-name">Jane Smith</h3>
+                      <p className="member-position">Design Director</p>
+                    </div>
                   </div>
-                </div>
-                <div className="member-info">
-                  <h3 className="member-name">Mike Johnson</h3>
-                  <p className="member-position">Production Manager</p>
-                </div>
-              </div>
-            </Card>
+                </Card>
+                <Card className="team-card">
+                  <div className="team-member">
+                    <div className="member-image">
+                      <div className="placeholder-avatar">
+                        <h3>MD</h3>
+                      </div>
+                    </div>
+                    <div className="member-info">
+                      <h3 className="member-name">Mike Johnson</h3>
+                      <p className="member-position">Production Manager</p>
+                    </div>
+                  </div>
+                </Card>
+              </>
+            )}
           </div>
         </div>
       </section>

@@ -98,6 +98,7 @@ sequelize.authenticate()
 const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const companyInfoRoutes = require('./routes/companyInfoRoutes');
+const teamMemberRoutes = require('./routes/teamMemberRoutes');
 const productionProcessRoutes = require('./routes/productionProcessRoutes');
 const qualityCertificationRoutes = require('./routes/qualityCertificationRoutes');
 const clientRoutes = require('./routes/clientRoutes');
@@ -124,6 +125,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/company-info', companyInfoRoutes);
+app.use('/api/team-members', teamMemberRoutes);
 app.use('/api/production-processes', productionProcessRoutes);
 app.use('/api/quality-certifications', qualityCertificationRoutes);
 app.use('/api/clients', clientRoutes);

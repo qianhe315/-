@@ -18,6 +18,7 @@ import Dashboard from './admin/pages/Dashboard';
 import ProductManagement from './admin/pages/ProductManagement';
 import CategoryManagement from './admin/pages/CategoryManagement';
 import CompanyInfoManagement from './admin/pages/CompanyInfoManagement';
+import TeamMemberManagement from './admin/pages/TeamMemberManagement';
 import ProductionProcessManagement from './admin/pages/ProductionProcessManagement';
 import QualityCertificationManagement from './admin/pages/QualityCertificationManagement';
 import ClientsManagement from './admin/pages/ClientsManagement';
@@ -91,6 +92,7 @@ function App() {
           <Route path="/admin/products" element={<AdminLayout><ProductManagement /></AdminLayout>} />
           <Route path="/admin/categories" element={<AdminLayout><CategoryManagement /></AdminLayout>} />
           <Route path="/admin/company-info" element={<AdminLayout><CompanyInfoManagement /></AdminLayout>} />
+          <Route path="/admin/team-members" element={<AdminLayout><TeamMemberManagement /></AdminLayout>} />
           <Route path="/admin/production" element={<AdminLayout><ProductionProcessManagement /></AdminLayout>} />
           <Route path="/admin/quality" element={<AdminLayout><QualityCertificationManagement /></AdminLayout>} />
           <Route path="/admin/clients" element={<AdminLayout><ClientsManagement /></AdminLayout>} />

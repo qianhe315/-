@@ -1,28 +1,21 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const CompanyInfo = sequelize.define('CompanyInfo', {
-  title: {
-    type: DataTypes.STRING(200),
-    allowNull: false,
-  },
-  content: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
+const CategoryImage = sequelize.define('CategoryImage', {
   imageUrl: {
     type: DataTypes.STRING(500),
-    allowNull: true,
+    allowNull: false,
     field: 'image_url',
   },
-  type: {
-    type: DataTypes.ENUM('brand_story', 'about_us', 'mission_vision'),
-    allowNull: false,
-  },
-  isActive: {
+  isPrimary: {
     type: DataTypes.BOOLEAN,
-    defaultValue: true,
-    field: 'is_active',
+    defaultValue: false,
+    field: 'is_primary',
+  },
+  sortOrder: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+    field: 'sort_order',
   },
   createdAt: {
     type: DataTypes.DATE,
@@ -36,9 +29,9 @@ const CompanyInfo = sequelize.define('CompanyInfo', {
     field: 'updated_at',
   },
 }, {
-  tableName: 'company_info',
+  tableName: 'category_images',
   timestamps: true,
   underscored: true,
 });
 
-module.exports = CompanyInfo;
+module.exports = CategoryImage;

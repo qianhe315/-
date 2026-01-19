@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form, Input, message, Space, Typography, Tag, Row, Col } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Table, Button, Modal, Form, Input, Upload, message, Space, Typography, Tag, Row, Col } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, UploadOutlined, CloseOutlined } from '@ant-design/icons';
 import AdminLayout from '../components/Layout';
 import categoryService from '../services/categoryService';
+import adminApi from '../services/adminApi';
 import '../styles/CategoryManagement.scss';
 
 const { Title, Text } = Typography;
@@ -13,6 +14,7 @@ const CategoryManagement = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [editingId, setEditingId] = useState(null);
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     fetchCategories();
@@ -33,6 +35,7 @@ const CategoryManagement = () => {
   const handleAddCategory = () => {
     form.resetFields();
     setEditingId(null);
+    setImages([]);
     setModalVisible(true);
   };
 
@@ -44,6 +47,7 @@ const CategoryManagement = () => {
       sortOrder: category.sortOrder
     });
     setEditingId(category.id);
+    setImages(category.category_images || []);
     setModalVisible(true);
   };
 
@@ -59,19 +63,63 @@ const CategoryManagement = () => {
 
   const handleSubmit = async (values) => {
     try {
+      const categoryData = {
+        ...values,
+        images: images
+      };
+      
       if (editingId) {
-        // Update category
-        await categoryService.updateCategory(editingId, values);
+        await categoryService.updateCategory(editingId, categoryData);
         message.success('Category updated successfully');
       } else {
-        // Create category
-        await categoryService.createCategory(values);
+        await categoryService.createCategory(categoryData);
         message.success('Category created successfully');
       }
       setModalVisible(false);
       fetchCategories();
     } catch (err) {
       message.error('Failed to save category');
+    }
+  };
+
+  const handleFileUpload = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const response = await adminApi.post('/media/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      const newImage = {
+        imageUrl: response.filePath,
+        isPrimary: images.length === 0,
+        sortOrder: images.length
+      };
+      
+      setImages([...images, newImage]);
+      return false;
+    } catch (err) {
+      message.error('Failed to upload image');
+      return false;
+    }
+  };
+
+  const handleDeleteImage = async (index) => {
+    try {
+      const newImages = [...images];
+      newImages.splice(index, 1);
+      const updatedImages = newImages.map((image, idx) => ({
+        ...image,
+        isPrimary: idx === 0,
+        sortOrder: idx
+      }));
+      setImages(updatedImages);
+      message.success('Image deleted successfully');
+    } catch (err) {
+      message.error('Failed to delete image');
     }
   };
 
@@ -102,6 +150,24 @@ const CategoryManagement = () => {
       title: 'Sort Order',
       dataIndex: 'sortOrder',
       key: 'sortOrder'
+    },
+    {
+      title: 'Images',
+      dataIndex: 'category_images',
+      key: 'images',
+      render: (images) => (
+        <Space>
+          {images?.slice(0, 2).map((image) => (
+            <img 
+              key={image.id} 
+              src={image.imageUrl} 
+              alt="Category" 
+              style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 4 }}
+            />
+          ))}
+          {images?.length > 2 && <Text>...and {images.length - 2} more</Text>}
+        </Space>
+      )
     },
     {
       title: 'Action',
@@ -184,6 +250,41 @@ const CategoryManagement = () => {
               label="Description"
             >
               <Input.TextArea rows={3} placeholder="Category Description" />
+            </Form.Item>
+            
+            <Form.Item>
+              <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                <Text strong>Category Images</Text>
+                <Space wrap>
+                  {images.map((image, index) => (
+                    <div key={index} className="category-image-item">
+                      <img src={image.imageUrl} alt={`Category ${index}`} className="category-image" />
+                      <Button 
+                        type="text" 
+                        icon={<CloseOutlined />} 
+                        danger
+                        size="small"
+                        className="image-delete-btn"
+                        onClick={() => handleDeleteImage(index)}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  ))}
+                </Space>
+                <Upload
+                  listType="picture-card"
+                  beforeUpload={handleFileUpload}
+                  customRequest={handleFileUpload}
+                  maxCount={10}
+                  showUploadList={false}
+                >
+                  <div>
+                    <UploadOutlined />
+                    <div style={{ marginTop: 8 }}>Upload</div>
+                  </div>
+                </Upload>
+              </Space>
             </Form.Item>
             
             <Row gutter={16}>

@@ -12,7 +12,8 @@ import {
   CustomerServiceOutlined,
   PhoneOutlined,
   AppstoreOutlined,
-  SlidersOutlined
+  SlidersOutlined,
+  TeamOutlined
 } from '@ant-design/icons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import authService from '../services/authService';
@@ -39,6 +40,7 @@ const AdminLayout = ({ children }) => {
         if (pathname.includes('products')) setCurrent('products');
         else if (pathname.includes('categories')) setCurrent('categories');
         else if (pathname.includes('company-info')) setCurrent('company-info');
+        else if (pathname.includes('team-members')) setCurrent('team-members');
         else if (pathname.includes('production')) setCurrent('production');
         else if (pathname.includes('quality')) setCurrent('quality');
         else if (pathname.includes('clients')) setCurrent('clients');
@@ -74,6 +76,11 @@ const AdminLayout = ({ children }) => {
       key: 'company-info',
       icon: <FileTextOutlined />,
       label: <Link to="/admin/company-info">Company Info</Link>
+    },
+    {
+      key: 'team-members',
+      icon: <TeamOutlined />,
+      label: <Link to="/admin/team-members">Team Members</Link>
     },
     {
       key: 'production',

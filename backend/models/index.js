@@ -4,7 +4,9 @@ const sequelize = require('../config/database');
 const Product = require('./Product');
 const Category = require('./Category');
 const ProductImage = require('./ProductImage');
+const CategoryImage = require('./CategoryImage');
 const CompanyInfo = require('./CompanyInfo');
+const TeamMember = require('./TeamMember');
 const ProductionProcess = require('./ProductionProcess');
 const QualityCertification = require('./QualityCertification');
 const Client = require('./Client');
@@ -24,12 +26,17 @@ Category.hasMany(Product, { foreignKey: 'categoryId', as: 'products' });
 Product.hasMany(ProductImage, { foreignKey: 'productId', as: 'product_images', onDelete: 'CASCADE' });
 ProductImage.belongsTo(Product, { foreignKey: 'productId', as: 'product' });
 
+Category.hasMany(CategoryImage, { foreignKey: 'categoryId', as: 'category_images', onDelete: 'CASCADE' });
+CategoryImage.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
+
 module.exports = {
   sequelize,
   Product,
   Category,
   ProductImage,
+  CategoryImage,
   CompanyInfo,
+  TeamMember,
   ProductionProcess,
   QualityCertification,
   Client,
