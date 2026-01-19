@@ -7,7 +7,7 @@ const Media = require('../models/Media');
 require('dotenv').config();
 
 // Configure file uploads
-const uploadPath = path.join(__dirname, '..', process.env.UPLOAD_PATH);
+const uploadPath = path.join(__dirname, process.env.UPLOAD_PATH);
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (!fs.existsSync(uploadPath)) {
@@ -78,7 +78,15 @@ router.get('/:id', async (req, res) => {
 // Upload media file
 router.post('/upload', upload.single('file'), async (req, res) => {
   try {
+    console.log('Upload request received:', {
+      hasFile: !!req.file,
+      fileName: req.file?.originalname,
+      fileSize: req.file?.size,
+      mimetype: req.file?.mimetype
+    });
+    
     if (!req.file) {
+      console.error('No file uploaded');
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
@@ -90,9 +98,11 @@ router.post('/upload', upload.single('file'), async (req, res) => {
       description: req.body.description || ''
     });
 
+    console.log('Media created successfully:', media);
     res.status(201).json(media);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    console.error('Upload error:', err);
+    res.status(500).json({ message: err.message });
   }
 });
 
