@@ -14,7 +14,7 @@ const About = () => {
       try {
         const [aboutData, teamData] = await Promise.all([
           api.companyInfo.getByType('about_us'),
-          fetch('http://www.starleap.xin/api/team-members').then(res => res.json())
+          api.teamMembers.getAll()
         ]);
         setAboutUs(aboutData);
         setTeamMembers(teamData);

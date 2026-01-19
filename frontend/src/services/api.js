@@ -65,6 +65,15 @@ const endpoints = {
     delete: (id) => api.delete(`/company-info/${id}`),
   },
   
+  // Team Members
+  teamMembers: {
+    getAll: () => api.get('/team-members'),
+    getById: (id) => api.get(`/team-members/${id}`),
+    create: (data) => api.post('/team-members', data),
+    update: (id, data) => api.put(`/team-members/${id}`, data),
+    delete: (id) => api.delete(`/team-members/${id}`),
+  },
+  
   // Production Processes
   productionProcesses: {
     getAll: () => api.get('/production-processes'),
