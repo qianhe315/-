@@ -36,3 +36,7 @@ export const getCertificationImageUrl = (certification) => {
 export const getProcessImageUrl = (process) => {
   return getImageUrl(process.image_url);
 };
+
+export const getClientLogoUrl = (client) => {
+  return getImageUrl(client.logo_url);
+};

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Breadcrumb, Card, Spin, Row, Col } from 'antd';
 import api from '../services/api';
+import { getClientLogoUrl } from '../utils/imageUtils';
 import '../styles/Clients.scss';
 
 const Clients = () => {
@@ -55,7 +56,7 @@ const Clients = () => {
                 <Card key={client.id} className="client-card">
                   <div className="client-content">
                     <div className="client-logo">
-                      <img src={client.logoUrl} alt={client.name} />
+                      <img src={getClientLogoUrl(client)} alt={client.name} />
                     </div>
                     <div className="client-info">
                       <h2 className="client-name">{client.name}</h2>
