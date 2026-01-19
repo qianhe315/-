@@ -84,16 +84,21 @@ const CompanyInfoManagement = () => {
       const formData = new FormData();
       formData.append('file', file);
       
+      console.log('Uploading file:', file.name, file.size, file.type);
+      
       const response = await adminApi.post('/media/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
       
+      console.log('Upload response:', response);
+      
       setImageUrl(response.filePath);
       return false;
     } catch (err) {
-      message.error('Failed to upload image');
+      console.error('Upload error:', err);
+      message.error(`Failed to upload image: ${err.response?.data?.message || err.message}`);
       return false;
     }
   };

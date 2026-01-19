@@ -24,16 +24,27 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: process.env.MAX_FILE_SIZE
+    fileSize: parseInt(process.env.MAX_FILE_SIZE) || 5000000
   },
   fileFilter: (req, file, cb) => {
     const allowedTypes = /jpeg|jpg|png|gif|svg|pdf|doc|docx|xls|xlsx|mp4|mp3/;
     const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = allowedTypes.test(file.mimetype);
+    const allowedMimeTypes = /image\/jpeg|image\/jpg|image\/png|image\/gif|image\/svg|application\/pdf|application\/msword|application\/vnd\.openxmlformats-officedocument\.wordprocessingml\.document|application\/vnd\.ms-excel|application\/vnd\.openxmlformats-officedocument\.spreadsheetml\.sheet|video\/mp4|audio\/mp3/;
+    const mimetype = allowedMimeTypes.test(file.mimetype);
+    
+    console.log('File upload check:', {
+      originalname: file.originalname,
+      extname: path.extname(file.originalname).toLowerCase(),
+      mimetype: file.mimetype,
+      extnameValid: extname,
+      mimetypeValid: mimetype
+    });
+    
     if (extname && mimetype) {
       return cb(null, true);
     } else {
-      cb('Error: Invalid file type!');
+      console.error('Invalid file type:', { extname, mimetype, fileMimetype: file.mimetype });
+      cb(new Error('Invalid file type! Allowed types: jpeg, jpg, png, gif, svg'));
     }
   }
 });
