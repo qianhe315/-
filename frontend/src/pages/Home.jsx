@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Row, Col, Card } from 'antd';
+import { Spin, message } from 'antd';
 import api from '../services/api';
+import { getImageUrl } from '../utils/imageUtils';
 import '../styles/Home.scss';
 
 const Home = () => {
@@ -37,7 +38,7 @@ const Home = () => {
           .filter(carousel => carousel.is_active)
           .map(carousel => ({
             ...carousel,
-            image: carousel.image_url,
+            image: getImageUrl(carousel.image_url),
             buttonText: carousel.button_text,
             buttonLink: carousel.button_link,
             sortOrder: carousel.sort_order,
