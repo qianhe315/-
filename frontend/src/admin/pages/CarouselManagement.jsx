@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form, Input, Upload, message, Space, Typography, Tag, Row, Col, Switch } from 'antd';
+import { Table, Button, Modal, Form, Input, Upload, Space, Typography, Tag, Row, Col, Switch, App } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, UploadOutlined, CloseOutlined } from '@ant-design/icons';
 import AdminLayout from '../components/Layout';
 import carouselService from '../services/carouselService';
@@ -7,6 +7,7 @@ import carouselService from '../services/carouselService';
 const { Title, Text } = Typography;
 
 const CarouselManagement = () => {
+  const { message } = App.useApp();
   const [carousels, setCarousels] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -208,7 +209,7 @@ const CarouselManagement = () => {
   ];
 
   return (
-    <Space direction="vertical" size="large" className="carousel-management-container">
+    <Space orientation="vertical" size="large" className="carousel-management-container">
       <Row justify="space-between" align="middle">
         <Col>
           <Title level={2}>Carousel Management</Title>
@@ -327,7 +328,7 @@ const CarouselManagement = () => {
                   ]}
                   label="Image"
                 >
-                  <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                  <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
                     {imageUrl && (
                       <div className="image-preview">
                         <img 
@@ -370,7 +371,7 @@ const CarouselManagement = () => {
             </Row>
             
             <Form.Item>
-              <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
                 <Button type="primary" htmlType="submit" block loading={loading}>
                   Save Carousel
                 </Button>

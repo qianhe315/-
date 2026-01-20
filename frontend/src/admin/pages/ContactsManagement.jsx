@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form, Input, Select, message, Space, Typography, Tag, Row, Col } from 'antd';
+import { Table, Button, Modal, Form, Input, Select, Space, Typography, Tag, Row, Col, App } from 'antd';
 const { TextArea } = Input;
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import AdminLayout from '../components/Layout';
@@ -9,6 +9,7 @@ const { Title, Text } = Typography;
 const { Option } = Select;
 
 const ContactsManagement = () => {
+  const { message } = App.useApp();
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -236,7 +237,7 @@ const ContactsManagement = () => {
           </Form.Item>
           
           <Form.Item>
-            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+            <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
               <Button type="primary" htmlType="submit" block>
                 Save Contact
               </Button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form, Input, Select, message, Space, Typography, Tag, Row, Col } from 'antd';
+import { Table, Button, Modal, Form, Input, Select, Space, Typography, Tag, Row, Col, App } from 'antd';
 const { TextArea } = Input;
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import AdminLayout from '../components/Layout';
@@ -9,6 +9,7 @@ const { Title, Text } = Typography;
 const { Option } = Select;
 
 const QualityCertificationManagement = () => {
+  const { message } = App.useApp();
   const [qualityCertifications, setQualityCertifications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -131,7 +132,7 @@ const QualityCertificationManagement = () => {
   ];
 
   return (
-    <Space direction="vertical" size="large" className="quality-certification-management-container">
+    <Space orientation="vertical" size="large" className="quality-certification-management-container">
       <Row justify="space-between" align="middle">
         <Col>
           <Title level={2}>Quality Certification Management</Title>
@@ -225,7 +226,7 @@ const QualityCertificationManagement = () => {
             </Row>
             
             <Form.Item>
-              <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
                 <Button type="primary" htmlType="submit" block>
                   Save Quality Certification
                 </Button>

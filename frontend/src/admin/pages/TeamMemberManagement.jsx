@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form, Input, Upload, message, Space, Typography, Tag, Row, Col } from 'antd';
+import { Table, Button, Modal, Form, Input, Upload, Space, Typography, Tag, Row, Col, App } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, UploadOutlined, CloseOutlined } from '@ant-design/icons';
 import AdminLayout from '../components/Layout';
 import adminApi from '../services/adminApi';
@@ -8,6 +8,7 @@ import '../styles/TeamMemberManagement.scss';
 const { Title, Text } = Typography;
 
 const TeamMemberManagement = () => {
+  const { message } = App.useApp();
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -180,7 +181,7 @@ const TeamMemberManagement = () => {
   ];
 
   return (
-    <Space direction="vertical" size="large" className="team-member-management-container">
+    <Space orientation="vertical" size="large" className="team-member-management-container">
       <Row justify="space-between" align="middle">
         <Col>
           <Title level={2}>Team Member Management</Title>
@@ -237,7 +238,7 @@ const TeamMemberManagement = () => {
           </Form.Item>
           
           <Form.Item label="Image">
-            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+            <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
               {imageUrl ? (
                 <div style={{ position: 'relative', display: 'inline-block' }}>
                   <img src={imageUrl} alt="Team Member" style={{ width: 200, height: 200, objectFit: 'cover', borderRadius: 4 }} />
@@ -294,7 +295,7 @@ const TeamMemberManagement = () => {
           </Row>
           
           <Form.Item>
-            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+            <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
               <Button type="primary" htmlType="submit" block>
                 Save Team Member
               </Button>

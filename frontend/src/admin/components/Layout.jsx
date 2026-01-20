@@ -157,10 +157,10 @@ const AdminLayout = ({ children }) => {
               onClick={() => setCollapsed(!collapsed)}
               className="admin-trigger"
             />
-            <Breadcrumb>
-              <Breadcrumb.Item>Admin</Breadcrumb.Item>
-              <Breadcrumb.Item>{current.charAt(0).toUpperCase() + current.slice(1)}</Breadcrumb.Item>
-            </Breadcrumb>
+            <Breadcrumb items={[
+              { title: 'Admin' },
+              { title: current.charAt(0).toUpperCase() + current.slice(1) }
+            ]} />
           </Space>
           <Space className="header-right">
             <Dropdown menu={{ items: userMenu }}>

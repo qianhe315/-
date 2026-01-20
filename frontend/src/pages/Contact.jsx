@@ -30,10 +30,10 @@ const Contact = () => {
       {/* Breadcrumb */}
       <section className="breadcrumb-section">
         <div className="container">
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item>Contact</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb items={[
+            { title: <a href="/">Home</a> },
+            { title: 'Contact' }
+          ]} />
         </div>
       </section>
 

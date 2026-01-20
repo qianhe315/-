@@ -54,7 +54,7 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item>
-            <Space direction="vertical" style={{ width: '100%' }}>
+            <Space orientation="vertical" style={{ width: '100%' }}>
               <Button type="primary" htmlType="submit" loading={loading} block size="large">
                 Log in
               </Button>

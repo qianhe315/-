@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, App as AntApp } from 'antd';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -84,7 +84,8 @@ function App() {
         },
       }}
     >
-      <Router>
+      <AntApp>
+        <Router>
         <Routes>
           {/* Admin routes - no Header/Footer */}
           <Route path="/admin/login" element={<Login />} />
@@ -122,7 +123,8 @@ function App() {
             </div>
           } />
         </Routes>
-      </Router>
+        </Router>
+      </AntApp>
     </ConfigProvider>
   );
 }

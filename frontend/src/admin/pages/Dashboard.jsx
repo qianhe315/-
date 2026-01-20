@@ -41,7 +41,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <Space direction="vertical" size="large" className="dashboard-container">
+    <Space orientation="vertical" size="large" className="dashboard-container">
       <Title level={2}>Dashboard</Title>
       <Row gutter={[16, 16]}>
         {statistics.map((stat, index) => (

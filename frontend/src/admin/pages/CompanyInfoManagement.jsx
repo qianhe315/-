@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Modal, Form, Input, Select, Upload, message, Space, Typography, Tag, Row, Col } from 'antd';
+import { Table, Button, Modal, Form, Input, Select, Upload, Space, Typography, Tag, Row, Col, App } from 'antd';
 const { TextArea } = Input;
 import { PlusOutlined, EditOutlined, DeleteOutlined, UploadOutlined, CloseOutlined } from '@ant-design/icons';
 import AdminLayout from '../components/Layout';
@@ -11,6 +11,7 @@ const { Title, Text } = Typography;
 const { Option } = Select;
 
 const CompanyInfoManagement = () => {
+  const { message } = App.useApp();
   const [companyInfos, setCompanyInfos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -169,7 +170,7 @@ const CompanyInfoManagement = () => {
   ];
 
   return (
-    <Space direction="vertical" size="large" className="company-info-management-container">
+    <Space orientation="vertical" size="large" className="company-info-management-container">
       <Row justify="space-between" align="middle">
         <Col>
           <Title level={2}>Company Info Management</Title>
@@ -244,7 +245,7 @@ const CompanyInfoManagement = () => {
             </Form.Item>
             
             <Form.Item label="Image">
-              <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
                 {imageUrl ? (
                   <div style={{ position: 'relative', display: 'inline-block' }}>
                     <img src={imageUrl} alt="Company Info" style={{ width: 200, height: 200, objectFit: 'cover', borderRadius: 4 }} />
@@ -301,7 +302,7 @@ const CompanyInfoManagement = () => {
             </Row>
             
             <Form.Item>
-              <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
                 <Button type="primary" htmlType="submit" block>
                   Save Company Info
                 </Button>

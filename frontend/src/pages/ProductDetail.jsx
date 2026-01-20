@@ -54,11 +54,11 @@ const ProductDetail = () => {
       {/* Breadcrumb */}
       <section className="breadcrumb-section">
         <div className="container">
-          <Breadcrumb>
-            <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="/products">Products</Link></Breadcrumb.Item>
-            <Breadcrumb.Item>{product.name}</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb items={[
+            { title: <Link to="/">Home</Link> },
+            { title: <Link to="/products">Products</Link> },
+            { title: product.name }
+          ]} />
         </div>
       </section>
 

@@ -29,11 +29,11 @@ const Clients = () => {
       {/* Breadcrumb */}
       <section className="breadcrumb-section">
         <div className="container">
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/company">Company</Breadcrumb.Item>
-            <Breadcrumb.Item>Our Clients</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb items={[
+            { title: <a href="/">Home</a> },
+            { title: <a href="/company">Company</a> },
+            { title: 'Our Clients' }
+          ]} />
         </div>
       </section>
 
