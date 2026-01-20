@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Spin, message } from 'antd';
+import { Spin, message, Button, Card, Row, Col } from 'antd';
 import api from '../services/api';
 import { getImageUrl } from '../utils/imageUtils';
 import '../styles/Home.scss';
@@ -135,10 +135,17 @@ const Home = () => {
               <Link to={`/products/category/${category.id}`} key={category.id} className="category-item">
                 <div className="category-card">
                   <div className="category-image">
-                    {/* Placeholder image */}
-                    <div className="placeholder-image">
-                      <h3>{category.name}</h3>
-                    </div>
+                    {category.category_images && category.category_images.length > 0 ? (
+                      <img 
+                        src={getImageUrl(category.category_images[0].imageUrl)} 
+                        alt={category.name} 
+                        className="category-img"
+                      />
+                    ) : (
+                      <div className="placeholder-image">
+                        <h3>{category.name}</h3>
+                      </div>
+                    )}
                   </div>
                   <div className="category-content">
                     <h3 className="category-title">{category.name}</h3>
@@ -167,7 +174,7 @@ const Home = () => {
                   <div className="product-image">
                     {product.product_images && product.product_images.length > 0 ? (
                       <img 
-                        src={product.product_images[0].imageUrl} 
+                        src={getImageUrl(product.product_images[0].imageUrl)} 
                         alt={product.name} 
                         className="product-img"
                       />

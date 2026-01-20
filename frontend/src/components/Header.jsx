@@ -174,17 +174,22 @@ const Header = () => {
         placement="right"
         onClose={() => setMobileVisible(false)}
         open={mobileVisible}
-        width={280}
+        size="large"
+        styles={{
+          header: {
+            backgroundColor: 'var(--color-primary)',
+            color: 'white',
+            borderBottom: 'none',
+            padding: '16px 24px',
+            fontSize: '1.25rem',
+            fontWeight: '600'
+          },
+          body: {
+            padding: 0
+          }
+        }}
         style={{
           borderRadius: '16px 0 0 16px',
-        }}
-        headerStyle={{
-          backgroundColor: 'var(--color-primary)',
-          color: 'white',
-          borderBottom: 'none',
-          padding: '16px 24px',
-          fontSize: '1.25rem',
-          fontWeight: '600'
         }}
       >
         <Menu

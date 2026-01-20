@@ -95,7 +95,7 @@ const Products = () => {
                       <div className="product-image">
                         {product.product_images && product.product_images.length > 0 ? (
                           <img
-                            src={getImageUrl(product.product_images[0])}
+                            src={getImageUrl(product.product_images[0].imageUrl)}
                             alt={product.name}
                             className="product-img"
                           />

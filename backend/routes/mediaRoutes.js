@@ -7,7 +7,7 @@ const Media = require('../models/Media');
 require('dotenv').config();
 
 // Configure file uploads
-const uploadPath = path.join(__dirname, process.env.UPLOAD_PATH);
+const uploadPath = path.join(__dirname, '..', process.env.UPLOAD_PATH);
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (!fs.existsSync(uploadPath)) {

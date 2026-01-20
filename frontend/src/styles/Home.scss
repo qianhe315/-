@@ -184,6 +184,13 @@
           overflow: hidden;
           background-color: var(--color-neutral-200);
 
+          .category-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+          }
+
           .placeholder-image {
             display: flex;
             align-items: center;
@@ -196,6 +203,7 @@
             transition: all var(--transition-base);
           }
 
+          &:hover .category-img,
           &:hover .placeholder-image {
             transform: scale(1.05);
           }
